@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "228378535677",
+    "firebase_url": "https://happy-shopping-b42da.firebaseio.com",
+    "project_id": "happy-shopping-b42da",
+    "storage_bucket": "happy-shopping-b42da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228378535677:android:dbd1b39da3950fbf",
+        "android_client_info": {
+          "package_name": "com.acg.midtermrequirement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "228378535677-g53nc1vi5rgiqqtp1iv7dtfeoikmd9c8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.acg.midtermrequirement",
+            "certificate_hash": "D75E3CC70845B25A1E96C61A4FA102B132137360"
+          }
+        },
+        {
+          "client_id": "228378535677-m1n8ljtg69tu4e5idr9h27m12kiiudhn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4aPxzsoIPTk1fjjjS21qNnBpUq9jNoJQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "228378535677-m1n8ljtg69tu4e5idr9h27m12kiiudhn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
