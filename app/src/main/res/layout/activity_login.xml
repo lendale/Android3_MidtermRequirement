@@ -113,26 +113,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <CheckBox
-                android:id="@+id/check_remember"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="60dp"
-                android:layout_weight="2"
-                android:buttonTint="@color/colorHint"
-                android:checked="false"
-                android:text="@string/remember_me"
-                android:textColor="@color/colorHint"
-                android:textSize="11dp" />
+            android:orientation="horizontal"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="10dp">
 
             <com.acg.midtermrequirement.customfont.MyTextView
                 android:id="@+id/tv_forgot_pass"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="2.3"
+                android:layout_weight="2"
                 android:text="@string/forgot_password"
+                android:textColor="@color/colorHint"
+                android:textSize="11dp" />
+
+            <com.acg.midtermrequirement.customfont.MyTextView
+                android:id="@+id/tv_sign_up"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/sign_up"
                 android:textColor="@color/colorHint"
                 android:textSize="11dp" />
         </LinearLayout>

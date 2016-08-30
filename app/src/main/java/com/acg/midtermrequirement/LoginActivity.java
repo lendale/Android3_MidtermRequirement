@@ -32,6 +32,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPass;
     private TextView tvSignIn1;
+    private TextView tvForgotPass;
+    private TextView tvSignUp;
     private ImageView imgSignInFb;
 
     private LinearLayout linSignInFb;
@@ -39,21 +41,31 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        findViews();
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
         setContentView(R.layout.activity_login);
+        findViews();
+        initOnclickListeners();
     }
 
     private void findViews() {
         etEmail = (EditText) findViewById(R.id.et_email);
         etPass = (EditText) findViewById(R.id.et_pass);
         tvSignIn1 = (TextView) findViewById(R.id.tv_sign_in_1);
+        tvForgotPass = (TextView) findViewById(R.id.tv_forgot_pass);
+        tvSignUp = (TextView) findViewById(R.id.tv_sign_up);
         imgSignInFb = (ImageView) findViewById(R.id.img_sign_in_fb_2);
         linSignInFb = (LinearLayout) findViewById(R.id.lin_sign_in_fb_1);
     }
 
     private void initOnclickListeners() {
+        tvSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         tvSignIn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,6 +81,13 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         linSignInFb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        tvForgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
