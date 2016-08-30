@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cardview_light_background"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/cardview_light_background"
-    android:orientation="vertical"
-    tools:context="com.acg.midtermrequirement.LoginActivity"
-    android:weightSum="1">
+    android:weightSum="1"
+    tools:context="com.acg.midtermrequirement.LoginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,37 +22,37 @@
         android:paddingTop="@dimen/activity_vertical_margin">
 
         <ImageView
+            android:id="@+id/imgLogo"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:background="@drawable/ic_happyshopping"
-            android:scaleType="centerCrop"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_marginLeft="15dp"
             android:layout_marginStart="15dp"
-            android:id="@+id/imgLogo" />
+            android:background="@drawable/ic_happyshopping"
+            android:scaleType="centerCrop" />
 
         <com.acg.midtermrequirement.customfont.MyTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:gravity="center"
-            android:textColor="#4c565f"
-            android:textSize="35dp"
-            android:padding="10dp"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/app_name"
+            android:textColor="#4c565f"
+            android:textSize="35dp" />
 
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/colorHint"
+        android:orientation="vertical"
         android:textColor="@color/colorText"
-        android:orientation="vertical">
+        android:textColorHint="@color/colorHint">
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -61,25 +61,25 @@
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:hint="@string/hint_email"
                 android:layout_marginLeft="46dp"
-                android:textColorHint="@color/colorHint"
-                android:textColor="@color/colorText"
-                android:maxLength="12"
                 android:background="#0000"
-                android:padding="16dp"
-                android:gravity="left"
                 android:drawableLeft="@drawable/user"
-                android:drawablePadding="12dp"/>
+                android:drawablePadding="12dp"
+                android:gravity="left"
+                android:hint="@string/hint_email"
+                android:maxLength="12"
+                android:padding="16dp"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorHint"
+                android:textSize="16dp" />
 
         </android.support.design.widget.TextInputLayout>
 
         <View
             android:layout_width="match_parent"
+            android:layout_height="1dp"
             android:layout_marginLeft="56dp"
             android:layout_marginRight="56dp"
-            android:layout_height="1dp"
             android:background="#59d58d"/>
 
         <android.support.design.widget.TextInputLayout
@@ -89,34 +89,34 @@
                 android:id="@+id/et_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:hint="@string/hint_pass"
                 android:layout_marginLeft="46dp"
-                android:textColorHint="@color/colorHint"
-                android:textColor="@color/colorText"
-                android:maxLength="12"
                 android:background="#0000"
-                android:padding="16dp"
-                android:gravity="left"
                 android:drawableLeft="@drawable/pass"
-                android:drawablePadding="12dp"/>
+                android:drawablePadding="12dp"
+                android:gravity="left"
+                android:hint="@string/hint_pass"
+                android:maxLength="12"
+                android:padding="16dp"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorHint"
+                android:textSize="16dp" />
 
         </android.support.design.widget.TextInputLayout>
 
         <View
             android:layout_width="match_parent"
+            android:layout_height="1dp"
             android:layout_marginLeft="56dp"
             android:layout_marginRight="56dp"
-            android:layout_height="1dp"
             android:background="#59d58d"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="70dp"
             android:layout_marginRight="60dp"
-            android:layout_marginTop="10dp">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <com.acg.midtermrequirement.customfont.MyTextView
                 android:id="@+id/tv_forgot_pass"
@@ -126,7 +126,7 @@
                 android:layout_weight="2"
                 android:text="@string/forgot_password"
                 android:textColor="@color/colorHint"
-                android:textSize="11dp" />
+                android:textSize="12dp" />
 
             <com.acg.midtermrequirement.customfont.MyTextView
                 android:id="@+id/tv_sign_up"
@@ -136,7 +136,7 @@
                 android:layout_weight="1"
                 android:text="@string/sign_up"
                 android:textColor="@color/colorHint"
-                android:textSize="11dp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <com.acg.midtermrequirement.customfont.MyTextView
@@ -164,18 +164,18 @@
             android:textColor="@color/colorHint"/>
 
         <LinearLayout
+            android:id="@+id/lin_sign_in_fb_1"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
-            android:id="@+id/lin_sign_in_fb_1"
             android:background="@drawable/rectfb">
 
             <ImageView
+                android:id="@+id/img_sign_in_fb_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="12dp"
-                android:id="@+id/img_sign_in_fb_2"
                 android:src="@drawable/fb"/>
 
         </LinearLayout>
