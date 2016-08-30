@@ -138,7 +138,7 @@
         </LinearLayout>
 
         <com.acg.midtermrequirement.customfont.MyTextView
-            android:id="@+id/sign_in_1"
+            android:id="@+id/tv_sign_in_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="11dp"
@@ -166,14 +166,14 @@
             android:layout_height="45dp"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
-            android:id="@+id/sign_in_fb_1"
+            android:id="@+id/lin_sign_in_fb_1"
             android:background="@drawable/rectfb">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="12dp"
-                android:id="@+id/sign_in_fb_2"
+                android:id="@+id/img_sign_in_fb_2"
                 android:src="@drawable/fb"/>
 
         </LinearLayout>
