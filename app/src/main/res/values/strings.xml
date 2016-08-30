@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Happy Shopping</string>
     <string name="facebook_app_id">1574482016193061</string>
+    <string name="fb_login_protocol_scheme">1574482016193061</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_pass">Password</string>
+    <string name="sign_in_1">Sign in</string>
+    <string name="or">or</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forgot_password">Forgot password?</string>
 </resources>
