@@ -1,5 +1,6 @@
 package com.acg.midtermrequirement;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -12,14 +13,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private TextView mTvUserName;
+    private TextView mTvUserEmail;
+    private ImageView mImgUserPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        findViews();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -40,6 +51,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        receiveIntent();
     }
 
     @Override
@@ -90,12 +103,35 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_sign_out) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void findViews() {
+        View header = ((NavigationView) findViewById(R.id.nav_view)).getHeaderView(0);
+
+        mTvUserEmail = (TextView) header.findViewById(R.id.tv_user_email);
+        mTvUserName = (TextView) header.findViewById(R.id.tv_user_name);
+        mImgUserPhoto = (ImageView) header.findViewById(R.id.img_user_photo);
+    }
+
+    private void receiveIntent() {
+        Bundle intent = getIntent().getExtras();
+
+        if (intent == null) {
+            throw new RuntimeException("MainActivity is expecting intent extras passed by Intent");
+        }
+
+        mTvUserEmail.setText(intent.getString("USER_EMAIL"));
+        mTvUserName.setText(intent.getString("USER_NAME"));
+        Glide.with(this).load(intent.get("USER_PHOTO_URL")).into(mImgUserPhoto);
     }
 }
