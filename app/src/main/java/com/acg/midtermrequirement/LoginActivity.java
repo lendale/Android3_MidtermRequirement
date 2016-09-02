@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         };
 
         mCallbackManager = CallbackManager.Factory.create();
-        mLoginManager = LoginManager.getInstance();
+        mLoginManager = ReLoginManager.getInstance();
         mLoginManager.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
