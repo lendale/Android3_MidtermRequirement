@@ -65,6 +65,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         findViews();
 
+
+        printHashkey();
+
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -93,7 +96,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         };
 
         mCallbackManager = CallbackManager.Factory.create();
-        mLoginManager = ReLoginManager.getInstance();
+        mLoginManager = LoginManager.getInstance();
         mLoginManager.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
