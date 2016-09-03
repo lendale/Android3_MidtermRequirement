@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,7 +23,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.acg.midtermrequirement.fragment.fragment_ShoppingList;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -34,18 +38,19 @@ public class MainActivity extends AppCompatActivity
     private TextView mTvUserEmail;
     private ImageView mImgUserPhoto;
     final Context c = this;
+    private FloatingActionButton fab;
 
-    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+            setContentView(R.layout.activity_main);
         findViews();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,10 +82,12 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        fab.hide();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -124,19 +131,24 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
+            fab.hide();
+        } else if (id == R.id.nav_shoppingList) {
+            fab.show();
+            fragmentView();
+            Toast.makeText(MainActivity.this, "Shopping List Clicked", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_slideshow) {
-
+            fab.hide();
         } else if (id == R.id.nav_manage) {
-
+            fab.hide();
         } else if (id == R.id.nav_share) {
-
+            fab.hide();
         } else if (id == R.id.nav_sign_out) {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -168,4 +180,27 @@ public class MainActivity extends AppCompatActivity
         mTvUserName.setText(intent.getString("USER_NAME"));
         Glide.with(this).load(intent.get("USER_PHOTO_URL")).into(mImgUserPhoto);
     }
+
+
+
+    public void fragmentView(){
+        Fragment fragment = null;
+        String title;
+
+        fragment = new fragment_ShoppingList();
+        title =getString(R.string.title_ShoppingList);
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container_body, fragment);
+        fragmentTransaction.commit();
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(title);
+        }
+    }
+
+    public void fab(){
+
+    }
+
 }
