@@ -17,4 +17,5 @@
     <string name="action_settings">Settings</string>
     <string name="sign_out">Sign out</string>
     <string name="title_ShoppingList">Shopping List</string>
+    <string name="ShoppingList">Shopping List</string>
 </resources>

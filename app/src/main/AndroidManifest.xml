@@ -31,7 +31,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        s
+
         <activity
             android:name=".LoginActivity"
             android:theme="@style/LoginTheme" >

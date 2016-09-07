@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -25,20 +24,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.acg.midtermrequirement.fragment.fragment_ShoppingList;
+import com.acg.midtermrequirement.fragment.FragmentShoppingList;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String TAG = "KEY";
     private TextView mTvUserName;
     private TextView mTvUserEmail;
     private ImageView mImgUserPhoto;
     final Context c = this;
-    private FloatingActionButton fab;
+    public FloatingActionButton fab;
 
 
     @Override
@@ -51,36 +49,16 @@ public class MainActivity extends AppCompatActivity
 
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LayoutInflater layoutInflater = LayoutInflater.from(c);
-                View mView = layoutInflater.inflate(R.layout.add_shoppinglist,null);
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(c);
-                alertDialogBuilder.setView(mView);
-
-                final EditText input = (EditText) mView.findViewById(R.id.etInputDialog);
-                alertDialogBuilder
-                        .setCancelable(false)
-                        .setPositiveButton("Add", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-
-
-                            }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
-                            }
-                        });
-
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+                alertDialog();
 
             }
         });
+
+
 
         fab.hide();
 
@@ -94,6 +72,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         receiveIntent();
+        displayView(R.id.nav_shoppingList);
     }
 
     @Override
@@ -132,32 +111,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-            fab.hide();
-        } else if (id == R.id.nav_shoppingList) {
-            fab.show();
-            fragmentView();
-            Toast.makeText(MainActivity.this, "Shopping List Clicked", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_slideshow) {
-            fab.hide();
-        } else if (id == R.id.nav_manage) {
-            fab.hide();
-        } else if (id == R.id.nav_share) {
-            fab.hide();
-        } else if (id == R.id.nav_sign_out) {
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        displayView(item.getItemId());
         return true;
     }
 
@@ -181,26 +136,70 @@ public class MainActivity extends AppCompatActivity
         Glide.with(this).load(intent.get("USER_PHOTO_URL")).into(mImgUserPhoto);
     }
 
+    public void displayView(int viewId) {
 
-
-    public void fragmentView(){
         Fragment fragment = null;
-        String title;
+        String title = getString(R.string.app_name);
 
-        fragment = new fragment_ShoppingList();
-        title =getString(R.string.title_ShoppingList);
-        FragmentManager supportFragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container_body, fragment);
-        fragmentTransaction.commit();
+        switch (viewId) {
+            case R.id.nav_shoppingList:
+                fragment = new FragmentShoppingList();
+                title  = "Shopping List";
+                fab.show();
+                break;
+            case R.id.nav_sign_out:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
 
+        if (fragment != null) {
+            FragmentTransaction supportFragmentTransaction = getSupportFragmentManager().beginTransaction();
+            supportFragmentTransaction.replace(R.id.container_body, fragment);
+            supportFragmentTransaction.commit();
+        }
+
+        // set the toolbar title
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(title);
         }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
     }
 
-    public void fab(){
+    public void alertDialog(){
+        LayoutInflater layoutInflater = LayoutInflater.from(c);
+        View mView = layoutInflater.inflate(R.layout.add_shoppinglist,null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(c);
+        alertDialogBuilder.setView(mView);
 
+        final EditText mInput = (EditText) mView.findViewById(R.id.etInputDialog);
+        final String getInput = mInput.getText().toString();
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
+
+
 
 }
+
+
