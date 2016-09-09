@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.acg.midtermrequirement.R;
+
 /**
  * Created by presciousalago on 08/09/2016.
  */
@@ -25,7 +27,7 @@ public class FragmentEmpty extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return inflater.inflate(R.layout.fragment_empty,container,false);
     }
 
 

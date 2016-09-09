@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.acg.midtermrequirement.R;
@@ -25,6 +27,12 @@ import java.util.ArrayList;
 public class FragmentShoppingList extends Fragment {
 
     ListView mListView;
+    TextView mTitle;
+    Bundle bundle = new Bundle();
+
+    ArrayList<String> shopList =  new ArrayList<>();
+    ArrayAdapter<String> adapter;
+
 
     public FragmentShoppingList() {
     }
@@ -42,40 +50,19 @@ public class FragmentShoppingList extends Fragment {
         View rootVIew = inflater.inflate(R.layout.fragment_shoppinglist,container,false);
 
         mListView = (ListView) rootVIew.findViewById(R.id.listView);
+        mTitle = (TextView) rootVIew.findViewById(R.id.label);
 
-        final ArrayList<String> shopList =  new ArrayList<>();
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(),android.R.layout.simple_list_item_1,shopList);
 
-        mListView.setAdapter(adapter);
+         bundle = getArguments();
 
-        Firebase ref = new Firebase("");
-        ref.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                shopList.add(dataSnapshot.getValue(String.class));
-                adapter.notifyDataSetChanged();
-            }
+        if(bundle == null){
+            Toast.makeText(getContext(), "Data Empty", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            String strtext = String.valueOf(bundle.get("edttext"));
+            mTitle.setText(strtext);
+        }
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
 
         return  rootVIew ;
     }
@@ -90,4 +77,10 @@ public class FragmentShoppingList extends Fragment {
         super.onDetach();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(),android.R.layout.simple_list_item_1,shopList);
+        mListView.setAdapter(adapter);
+    }
 }

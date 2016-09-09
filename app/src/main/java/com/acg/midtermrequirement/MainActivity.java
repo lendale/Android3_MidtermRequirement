@@ -19,14 +19,18 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.acg.midtermrequirement.fragment.FragmentEmpty;
 import com.acg.midtermrequirement.fragment.FragmentShoppingList;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,8 +40,10 @@ public class MainActivity extends AppCompatActivity
     private TextView mTvUserEmail;
     private ImageView mImgUserPhoto;
     final Context c = this;
-    public FloatingActionButton fab;
-
+    private FloatingActionButton fab;
+    private Bundle bundle = new Bundle();
+    ArrayList<String> mList = new ArrayList<>();
+    ArrayAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,17 +54,16 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
+
+
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 alertDialog();
-
             }
         });
-
-
 
         fab.hide();
 
@@ -72,7 +77,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         receiveIntent();
-        displayView(R.id.nav_shoppingList);
+        displayView(R.id.nav_camera);
     }
 
     @Override
@@ -153,6 +158,11 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
                 finish();
                 break;
+            default:
+                fragment = new FragmentEmpty();
+                title = "Happy Shopping";
+                fab.hide();
+                break;
         }
 
         if (fragment != null) {
@@ -179,11 +189,13 @@ public class MainActivity extends AppCompatActivity
 
         final EditText mInput = (EditText) mView.findViewById(R.id.etInputDialog);
         final String getInput = mInput.getText().toString();
+
         alertDialogBuilder
                 .setCancelable(false)
                 .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        onListAdded(getInput);
 
                     }
                 })
@@ -199,6 +211,17 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    private void setData(String addList){
+        FragmentShoppingList fragobj = new FragmentShoppingList();
+        bundle.putString("edttext", addList);
+        fragobj.setArguments(bundle);
+    }
+
+
+    public void onListAdded(String list){
+        mList.add(list);
+        mAdapter.notifyDataSetChanged();
+    }
 
 }
 
