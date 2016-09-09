@@ -139,8 +139,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Snackbar.make(view, "Forgot password", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         } else if (id == R.id.tv_sign_in_1) {
-            intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+            Snackbar.make(view, "Sign in", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         } else if (id == R.id.tv_sign_up) {
             Snackbar.make(view, "Sign up", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
